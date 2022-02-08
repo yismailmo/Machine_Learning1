@@ -1,2 +1,2 @@
-# Machine_Learning1
-Extracting text from videos
+These scripts can be used to convert speech contained in audio files into text.
+
