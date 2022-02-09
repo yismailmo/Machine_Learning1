@@ -1,0 +1,19 @@
+#Using textblob library in Python, to create Machine Learning Model for Spelling Corrections. 
+
+#First Get TextBlob (Simplified Text Processing) Library;
+
+$ pip install -U textblob
+$ python -m textblob.download_corpora
+
+#Then run the following code on Pycharm;
+
+from textblob import TextBlob
+
+words = ["Claud", "Engineir"]
+corrected_words = []
+for i in words:
+    corrected_words.append(TextBlob(i))
+print("Wrong words :", words)
+print("Corrected Words are :")
+for i in corrected_words:
+    print(i.correct(), end=" ")
