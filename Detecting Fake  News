@@ -1,0 +1,40 @@
+#First import dataset (from kaggle.com/hassanamin/txtdb3)
+#use this dataset to find relationships between fake and real news headlines 
+#to understand what type of headlines are in most fake news.
+
+#In first file (fake news detection1.py)
+import pandas as pd
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+
+data = pd.read_csv("news.csv")
+print(data.head())
+
+#in second file(fake news detection2.py)
+#using the title column as the feature to train a machine learning model 
+#and the label column as the values we want to predict
+
+x = np.array(data["title"])
+y = np.array(data["label"])
+
+cv = CountVectorizer()
+x = cv.fit_transform(x)
+
+#in file 3 (fake news detection3.py)
+#using the Multinomial Naive Bayes algorithm to train the fake news detection model
+#but first separate the dataset into training and testing sets
+
+xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.2, random_state=42)
+model = MultinomialNB()
+model.fit(xtrain, ytrain)
+print(model.score(xtest, ytest))
+
+#in file4(fake news detection4.py)
+#So now is to test the model and see whether it can detect a true or fake story from Google news
+
+news_headline = "CA Exams 2021: Supreme Court asks ICAI to extend opt-out option for July exams, final order tomorrow"
+data = cv.transform([news_headline]).toarray()
+print(model.predict(data))
+
